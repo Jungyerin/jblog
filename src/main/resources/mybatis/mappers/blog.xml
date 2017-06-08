@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="blog">
+
+	<insert id="insertLogin">
+		<![CDATA[	
+			insert into blog (user_no)
+			select max(no) from users
+		]]>
+	</insert>
+
+	<insert id="insertCategory">
+		<![CDATA[	
+			insert into category (no, user_no, date)
+			select null, max(no), now() from users
+		]]>
+	</insert>
+
+	<select id="getMain" parameterType="String" resultType="blogVo">
+		<![CDATA[
+			select b.user_no as userNo, b.title as title, b.logo as logo
+			from blog b, users u
+			where b.user_no=u.no
+			and u.id=#{_parameter }
+		]]>
+	</select>
+</mapper>
