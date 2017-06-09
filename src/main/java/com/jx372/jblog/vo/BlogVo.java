@@ -5,6 +5,7 @@ public class BlogVo {
 	private Long userNo;
 	private String title;
 	private String logo;
+	private String blogid;
 	public Long getUserNo() {
 		return userNo;
 	}
@@ -23,10 +24,18 @@ public class BlogVo {
 	public void setLogo(String logo) {
 		this.logo = logo;
 	}
+	
+	public String getBlogid() {
+		return blogid;
+	}
+	public void setBlogid(String blogid) {
+		this.blogid = blogid;
+	}
 	@Override
 	public String toString() {
-		return "BlogVo [userNo=" + userNo + ", title=" + title + ", logo=" + logo + "]";
+		return "BlogVo [userNo=" + userNo + ", title=" + title + ", logo=" + logo + ", blogid=" + blogid + "]";
 	}
+	
 	
 	
 

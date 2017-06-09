@@ -17,12 +17,115 @@
 		]]>
 	</insert>
 
+	<insert id="insertC" parameterType="map">
+		<![CDATA[	
+			insert into category 
+			values ( null, 
+					(select no from users where id=#{id }), #{title }, #{description }, now())
+		]]>
+	</insert>
+
 	<select id="getMain" parameterType="String" resultType="blogVo">
 		<![CDATA[
-			select b.user_no as userNo, b.title as title, b.logo as logo
+			select b.user_no as userNo, b.title as title, b.logo as logo, u.id as blogid
 			from blog b, users u
 			where b.user_no=u.no
 			and u.id=#{_parameter }
 		]]>
 	</select>
+
+	<select id="getList" parameterType="String" resultType="categoryVo">
+		<![CDATA[
+			select c.no as no, c.title as title, ifnull((select count(*) as postnum
+					from category cc, post p
+					where cc.no=p.category_no
+					and cc.no=c.no
+					group by cc.title),0) as postnum, c.description as description
+			from category c, users u
+			where c.user_no=u.no
+			and u.id=#{_parameter } 		
+		]]>
+	</select>
+
+	<select id="getPostList" parameterType="map" resultType="postVo">
+		<![CDATA[
+			select p.no as no, p.category_no as cno, c.title as ctitle, 
+					p.title as title, p.content as content, DATE_FORMAT(p.date,'%Y/%d/%m') as date
+			from post p right outer join category c on (p.category_no=c.no), users u
+			where c.user_no=u.no
+			and u.id=#{id }
+			and c.title=#{ctitle } 		
+		]]>
+	</select>
+
+	<select id="getPost" parameterType="map" resultType="postVo">
+		<choose>
+			<when test="no == null or no ==''">
+		<![CDATA[
+			select p.no as no, p.category_no as cno, c.title as ctitle, 
+					p.title as title, p.content as content, DATE_FORMAT(p.date,'%Y/%d/%m') as date
+			from post p right outer join category c on (p.category_no=c.no), users u
+			where c.user_no=u.no
+			and u.id=#{id }
+			and c.title=#{ctitle }
+			limit 1 
+				
+		]]>
+			</when>
+			<otherwise>
+				<![CDATA[
+					select p.no as no, p.category_no as cno, c.title as ctitle, 
+					p.title as title, p.content as content, DATE_FORMAT(p.date,'%Y/%d/%m') as date
+					from post p right outer join category c on (p.category_no=c.no), users u
+					where c.user_no=u.no
+					and p.no=#{no } 
+					
+				]]>
+			</otherwise>
+		</choose>
+	</select>
+
+	<select id="getCount" parameterType="String" resultType="int">
+		<![CDATA[
+			select count(*)
+			from category c, users u
+			where c.user_no=u.no
+			and u.id=#{_parameter } 		
+		]]>
+	</select>
+
+	<delete id="categoryDelete" parameterType="map">
+		<![CDATA[
+			delete from category
+			where user_no=(select no from users where id=#{id })
+			and no = #{no };  		
+		]]>
+
+	</delete>
+
+	<insert id="insertP" parameterType="map">
+		<![CDATA[	
+			insert into post
+			values (null, (select c.no 
+							from category c, users u
+							where c.user_no=u.no
+							and u.id=#{id }
+							and c.title=#{postVo.category }), #{postVo.title }, #{postVo.content }, now())
+		]]>
+	</insert>
+
+	<update id="update" parameterType="blogVo">
+		<choose>
+			<when test="logo == null or logo ==''">
+				<![CDATA[
+					update blog set title=#{title } where user_no=(select no from users where id=#{blogid });
+				]]>
+			</when>
+			<otherwise>
+				<![CDATA[
+					update blog set title=#{title }, logo=#{logo } where user_no=(select no from users where id=#{blogid });					
+				]]>
+			</otherwise>
+		</choose>
+	</update>
 </mapper>

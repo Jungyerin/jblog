@@ -5,6 +5,7 @@
 		<typeAlias alias="userVo" type="com.jx372.jblog.vo.UserVo"/>
 		<typeAlias alias="blogVo" type="com.jx372.jblog.vo.BlogVo"/>
 		<typeAlias alias="categoryVo" type="com.jx372.jblog.vo.CategoryVo"/>
+		<typeAlias alias="postVo" type="com.jx372.jblog.vo.PostVo"/>
 	</typeAliases>
 
 	

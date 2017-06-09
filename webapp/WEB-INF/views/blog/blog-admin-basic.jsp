@@ -19,7 +19,7 @@
 				<c:import url="/WEB-INF/views/include/blogadminmenu.jsp">
 					<c:param name="menu" value="adminbasic" />
 				</c:import>
-				<form action="" method="post">
+				<form action="${pageContext.servletContext.contextPath }/${blogVo.blogid }/admin/basic" method="post" enctype="multipart/form-data">
 					<table class="admin-config">
 						<tr>
 							<td class="t">블로그 제목</td>
@@ -28,11 +28,11 @@
 						</tr>
 						<tr>
 							<td class="t">로고이미지</td>
-							<td><img src="${blogVo.logo }"></td>
+							<td><img src="${pageContext.request.contextPath }${blogVo.logo }"></td>
 						</tr>
 						<tr>
 							<td class="t">&nbsp;</td>
-							<td><input type="file" name="logo-file"></td>
+							<td><input type="file" name="file1"></td>
 						</tr>
 						<tr>
 							<td class="t">&nbsp;</td>
@@ -42,11 +42,7 @@
 				</form>
 			</div>
 		</div>
-		<div id="footer">
-			<p>
-				<strong>Spring 이야기</strong> is powered by JBlog (c)2016
-			</p>
-		</div>
+		<c:import url="/WEB-INF/views/include/blogfooter.jsp" />
 	</div>
 </body>
 </html>

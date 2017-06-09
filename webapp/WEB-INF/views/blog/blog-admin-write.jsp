@@ -24,8 +24,9 @@
 			      			<td>
 			      				<input type="text" size="60" name="title">
 				      			<select name="category">
-				      				<option>미분류</option>
-				      				<option>자바</option>
+				      			<c:forEach items="${list }" var="vo" varStatus="status">
+				      				<option>${vo.title }</option>
+				      			</c:forEach>
 				      			</select>
 				      		</td>
 			      		</tr>
@@ -41,11 +42,7 @@
 				</form>
 			</div>
 		</div>
-		<div id="footer">
-			<p>
-				<strong>Spring 이야기</strong> is powered by JBlog (c)2016
-			</p>
-		</div>
+		<c:import url="/WEB-INF/views/include/blogfooter.jsp" />
 	</div>
 </body>
 </html>

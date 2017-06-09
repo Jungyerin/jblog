@@ -1,5 +1,8 @@
 package com.jx372.jblog.service;
 
+import java.util.HashMap;
+import java.util.Map;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -23,8 +26,12 @@ public class UserService {
 	}
 	
 	public UserVo getUser(String id, String password){
+		Map<String,Object> map = new HashMap<String , Object>();
 		
-		UserVo userVo=userDao.get(id, password);
+		map.put("id", id);
+		map.put("password", password);
+		
+		UserVo userVo=userDao.get(map);
 		
 		return userVo;
 	}

@@ -26,11 +26,7 @@ public class UserDao {
 		
 	}
 
-	public UserVo get(String id, String password) {
-		Map<String,Object> map = new HashMap<String , Object>();
-		
-		map.put("id", id);
-		map.put("password", password);
+	public UserVo get(Map<String, Object> map) {
 		
 		UserVo userVo=sqlSession.selectOne("user.getByLogin",map);
 		

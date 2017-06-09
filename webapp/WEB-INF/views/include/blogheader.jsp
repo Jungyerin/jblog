@@ -5,7 +5,7 @@
 	pageEncoding="UTF-8"%>
 
 <div id="header">
-	<h1>${blogVo.title }</h1>
+		<a href="${pageContext.servletContext.contextPath }/${blogVo.blogid }"><h1>${blogVo.title }</h1></a>
 	<ul>
 		<c:choose>
 			<c:when test="${empty authUser }">
@@ -13,7 +13,7 @@
 			</c:when>
 			<c:when test="${!empty authUser &&  authUser.no==blogVo.userNo}">
 				<li><a href="${pageContext.servletContext.contextPath }/user/authout">로그아웃</a></li>
-				<li><a href="${pageContext.servletContext.contextPath }/blog/admin/basic/${authUser.id }">블로그관리</a></li>
+				<li><a href="${pageContext.servletContext.contextPath }/${authUser.id }/admin/basic">블로그관리</a></li>
 			</c:when>
 			<c:otherwise>
 				<li><a href="${pageContext.servletContext.contextPath }/user/authout">로그아웃</a></li>
