@@ -23,7 +23,22 @@
 			values ( null, 
 					(select no from users where id=#{id }), #{title }, #{description }, now())
 		]]>
+		<selectKey keyProperty="no" resultType="long" order="AFTER">
+			select last_insert_id()		
+		</selectKey>
 	</insert>
+	
+	<insert id="insertC2" parameterType="map">
+		<![CDATA[	
+			insert into category 
+			values ( null, 
+					(select no from users where id=#{id }), #{vo.title }, #{vo.description }, now())
+		]]>
+		<selectKey keyProperty="no" resultType="long" order="AFTER">
+			select last_insert_id()		
+		</selectKey>
+	</insert>
+	
 
 	<select id="getMain" parameterType="String" resultType="blogVo">
 		<![CDATA[

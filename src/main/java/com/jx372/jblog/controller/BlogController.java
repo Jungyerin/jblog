@@ -31,7 +31,6 @@ public class BlogController {
 			@RequestParam(value="ctitle", required=true, defaultValue="미분류") String ctitle,
 			@RequestParam(value="no", required=true, defaultValue="") Long no){
 		BlogVo blogVo = blogService.getMain(id);
-		System.out.println(no);
 		PostVo postVo = blogService.getPost(id, no, ctitle);
 		Map<String, Object> map = blogService.getMainList(id, ctitle);
 		
@@ -115,6 +114,7 @@ public class BlogController {
 	public String write(@PathVariable("id") String id,
 					@ModelAttribute PostVo postVo) {
 		
+		System.out.println("-----"+postVo);
 		blogService.write(id, postVo);
 		
 		return "redirect:/{id}/admin/category";		

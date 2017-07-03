@@ -1,0 +1,16 @@
+<%
+for( var i = 0; i < data.length; i++ ) {
+	
+	var vo = data[ i ];			
+%>
+<tr>
+	<td><%=vo.no%></td>
+	<td><%=vo.title%></td>
+	<td><%=vo.postnum%></td>
+	<td><%=vo.description%></td>
+	<td> <a id='' href='' data-no='<%=vo.no%>'>
+	<img src="/jblog/assets/images/delete.jpg"></a></td>
+</tr>
+<%
+	}
+%>

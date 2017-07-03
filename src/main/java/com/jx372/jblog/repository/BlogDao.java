@@ -43,7 +43,12 @@ public class BlogDao {
 		return count == 1;
 
 	}
-
+	
+	public void insertC2(Map<String, Object> map) {
+		
+		sqlSession.insert("blog.insertC2", map);
+	}
+	
 	public List<CategoryVo> getList(String id) {
 		List<CategoryVo> list = sqlSession.selectList("blog.getList", id);
 		return list;
@@ -86,5 +91,9 @@ public class BlogDao {
 		sqlSession.update("blog.update", blogVo);
 
 	}
+
+
+
+
 
 }

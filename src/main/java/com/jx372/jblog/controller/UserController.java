@@ -31,10 +31,6 @@ public class UserController {
 			Model model){
 		
 		if(result.hasErrors()){
-//			List<ObjectError> list = result.getAllErrors();
-//			for(ObjectError error: list){
-//				System.out.println(error);
-//			}
 			model.addAllAttributes(result.getModel());
 			return "user/join";
 		}

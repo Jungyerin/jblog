@@ -30,15 +30,21 @@ public class BlogService {
 		return blogVo;
 	}
 
-	public void insertC(String id, String name, String desc) {
+	public boolean insertC(String id, String name, String desc) {
 		Map<String, Object> map = new HashMap<String, Object>();
 		map.put("id", id);
 		map.put("title", name);
 		map.put("description", desc);
 		
-		blogDao.insertC(map);		
+		return blogDao.insertC(map);		
 		
 	}
+	
+	public void insertC(Map<String, Object> map) {
+		
+		blogDao.insertC2(map);
+	}
+	
 
 	public List<CategoryVo> getList(String id) {
 		List<CategoryVo> list = blogDao.getList(id);
@@ -49,11 +55,11 @@ public class BlogService {
 		return blogDao.getCount(id);
 	}
 
-	public void categoryDelete(String id, Long no) {
+	public boolean categoryDelete(String id, Long no) {
 		Map<String, Object> map = new HashMap<String, Object>();
 		map.put("id", id);
 		map.put("no", no);
-		blogDao.categoryDelete(map);		
+		return blogDao.categoryDelete(map);		
 	}
 
 	public void write(String id, PostVo postVo) {
@@ -134,6 +140,7 @@ public class BlogService {
 		blogDao.update(blogVo);
 		
 	}
-	
+
+
 
 }

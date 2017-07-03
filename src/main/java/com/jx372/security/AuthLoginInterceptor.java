@@ -21,11 +21,6 @@ public class AuthLoginInterceptor extends HandlerInterceptorAdapter {
 	public boolean preHandle(HttpServletRequest request, HttpServletResponse response, Object handler)
 			throws Exception {
 		
-	//	ApplicationContext ac = WebApplicationContextUtils.getWebApplicationContext(request.getServletContext()); 
-		
-		/*컨테이너를 가지고 옴*/
-	//	UserService userService = ac.getBean(UserService.class);
-		
 		String id = request.getParameter("id");
 		String pwd = request.getParameter("password");
 		
